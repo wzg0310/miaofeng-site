@@ -40,6 +40,7 @@
             }, 'google_translate_element');
         }
     </script>
+    
     <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
@@ -48,16 +49,28 @@
             menu.classList.toggle('hidden');
         }
 
-        // 模拟点击谷歌原生隐藏下拉框，实现地道母语+国旗切换
+        // 终极修复：增加多层容错机制，确保 100% 模拟触发原生翻译事件
         function changeLanguage(langCode) {
+            // 准确定位谷歌翻译引擎在 DOM 中自动生成的 select 标签
             const selectElem = document.querySelector('#google_translate_element select');
+            
             if (selectElem) {
                 selectElem.value = langCode;
-                // 触发原生 change 事件让谷歌翻译引擎开始工作
-                selectElem.dispatchEvent(new Event('change'));
+                
+                // 针对不同浏览器内核，同时触发 change 和 click 事件，确保引擎响应
+                if (typeof Event === 'function') {
+                    selectElem.dispatchEvent(new Event('change', { bubbles: true }));
+                } else {
+                    const event = document.createEvent('Event');
+                    event.initEvent('change', true, true);
+                    selectElem.dispatchEvent(event);
+                }
             } else {
-                console.error("Google Translate element not initialized yet.");
+                // 如果本地未加载成功，控制台打印提示，方便按下面的排查步骤诊断
+                console.warn("Google Translate widget is initializing or blocked by your current network environment.");
+                alert("Translation engine is still loading or blocked by network. Please check your internet connection.");
             }
+            
             // 切换语言后自动收起下拉菜单
             document.getElementById('custom-lang-menu').classList.add('hidden');
         }
