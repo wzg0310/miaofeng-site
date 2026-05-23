@@ -10,10 +10,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        #google_translate_element { display: none !important; }
-        .skiptranslate iframe, .goog-logo-link, .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        #google_translate_element {
+            display: none !important;
+        }
+
+        .skiptranslate iframe,
+        .goog-logo-link,
+        .goog-te-gadget span {
+            display: none !important;
+        }
     </style>
 
     <script type="text/javascript">
@@ -25,7 +39,8 @@
             }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <script type="text/javascript" src="https://www.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         function toggleLangDropdown() {
@@ -33,20 +48,27 @@
             menu.classList.toggle('hidden');
         }
 
-        // 模拟点击谷歌原生隐藏下拉框，实现地道母语+国旗切换
         function changeLanguage(langCode) {
-            const selectElem = document.querySelector('#google_translate_element select');
-            if (selectElem) {
-                selectElem.value = langCode;
-                // 触发原生 change 事件让谷歌翻译引擎开始工作
-                selectElem.dispatchEvent(new Event('change'));
+            try {
+                if (langCode === 'en') {
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.host;
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + location.hostname.split('.').slice(-2).join('.');
+                } else {
+                    const cookieValue = "/en/" + langCode;
+                    document.cookie = "googtrans=" + cookieValue + "; path=/;";
+                    document.cookie = "googtrans=" + cookieValue + "; path=/; domain=" + location.host;
+                    if (location.hostname.includes('.')) {
+                        document.cookie = "googtrans=" + cookieValue + "; path=/; domain=." + location.hostname.split('.').slice(-2).join('.');
+                    }
+                }
+                location.reload();
+            } catch (e) {
+                console.error("Cookie translation error:", e);
             }
-            // 切换语言后自动收起下拉菜单
-            document.getElementById('custom-lang-menu').classList.add('hidden');
         }
 
-        // 点击页面其他空白区域时，自动收起下拉菜单
-        window.addEventListener('click', function(e) {
+        window.addEventListener('click', function (e) {
             const btn = document.getElementById('lang-btn');
             const menu = document.getElementById('custom-lang-menu');
             if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
@@ -56,7 +78,7 @@
     </script>
 </head>
 
-<body class="bg-slate-50 text-slate-700 antialiased font-sans">
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
 
     <header class="sticky top-0 bg-white/95 backdrop-blur shadow-sm z-50 border-b border-gray-100">
         <div id="google_translate_element"></div>
@@ -66,7 +88,7 @@
                 <a href="index.html" class="text-2xl font-black tracking-wider text-blue-600">MFWCW</a>
                 <span class="text-xs text-gray-400 border-l pl-2 border-gray-300 uppercase hidden sm:inline tracking-wider font-semibold">Miao Feng Source Factory</span>
             </div>
-            
+
             <nav class="hidden lg:flex space-x-6 font-semibold text-gray-600 text-sm">
                 <a href="index.html" class="hover:text-blue-600 transition">HOME</a>
                 <a href="star-product.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Star Product</a>
@@ -74,64 +96,86 @@
                 <a href="factory-quality.html" class="hover:text-blue-600 transition">Factory & Quality</a>
                 <a href="contact.html" class="hover:text-blue-600 transition">Contact Us</a>
             </nav>
-            
+
             <div class="flex items-center gap-4">
                 <div class="relative">
-                    <button id="lang-btn" onclick="toggleLangDropdown()" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-3 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 transition outline-none">
+                    <button id="lang-btn" onclick="toggleLangDropdown()"
+                        class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-3 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 transition outline-none">
                         <span>🌐</span>
                         <span>Language</span>
-                        <svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
                     </button>
 
                     <div id="custom-lang-menu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl hidden z-50 py-1.5">
-                        <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇺🇸 English (US)</button>
-                        <button onclick="changeLanguage('zh-CN')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇨🇳 简体中文</button>
-                        <button onclick="changeLanguage('es')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇪🇸 Español</button>
-                        <button onclick="changeLanguage('fr')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇫🇷 Français</button>
-                        <button onclick="changeLanguage('de')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇩🇪 Deutsch</button>
-                        <button onclick="changeLanguage('it')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇮🇹 Italiano</button>
-                        <button onclick="changeLanguage('nl')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇳🇱 Nederlands</button>
+                        <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇺🇸</span> English (US)
+                        </button>
+                        <button onclick="changeLanguage('zh-CN')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇨🇳 </span> 简体中文
+                        </button>
+                        <button onclick="changeLanguage('es')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇪🇸</span> Español
+                        </button>
+                        <button onclick="changeLanguage('fr')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇫🇷</span> Français
+                        </button>
+                        <button onclick="changeLanguage('de')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇩🇪</span> Deutsch
+                        </button>
+                        <button onclick="changeLanguage('it')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇮🇹</span> Italiano
+                        </button>
+                        <button onclick="changeLanguage('nl')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇳🇱</span> Nederlands
+                        </button>
                     </div>
                 </div>
 
-                <a href="https://wa.me/8618022775361" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold text-xs uppercase tracking-wider hidden sm:flex">
+                <a href="https://wa.me/8618022775361" target="_blank"
+                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold flex items-center gap-1.5 shadow-sm transition text-xs uppercase tracking-wider hidden sm:flex">
                     WhatsApp
                 </a>
             </div>
         </div>
     </header>
 
-    <section class="bg-slate-900 text-white py-20 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="text-blue-500 text-xs font-bold uppercase tracking-widest block mb-3">Flagship Architectural Systems</span>
-            <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight leading-tight">
-                Minimalist Slimline <br><span class="text-blue-400">Sliding Glass Doors</span>
-            </h1>
-            <p class="mt-4 text-sm sm:text-base text-slate-400 max-w-2xl mx-auto">
-                Engineering-grade narrow profile patio systems designed for high-end luxury residential and commercial glazing projects.
-            </p>
+    <section class="py-12 bg-white border-b border-gray-200 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="text-blue-600 text-xs font-bold uppercase tracking-widest bg-blue-50 px-2.5 py-1 rounded">Engineering Masterpiece</span>
+            <h1 class="text-3xl sm:text-5xl font-black text-slate-900 mt-4 uppercase tracking-tight">Ultra-Slim Architectural Sliding Doors</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-3 max-w-2xl mx-auto">Discover the 26mm interlocking profile designed to deliver breathtaking panoramic infinity views while optimizing structural glass loading matrices.</p>
         </div>
     </section>
 
-    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div class="space-y-4">
-                <div class="bg-slate-200 aspect-[4/3] rounded-2xl overflow-hidden shadow-inner bg-[url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80')] bg-cover bg-center"></div>
-                <div class="grid grid-cols-2 gap-4">
-                    <div class="bg-slate-200 aspect-square rounded-xl overflow-hidden bg-[url('https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=400&q=80')] bg-cover bg-center"></div>
-                    <div class="bg-slate-200 aspect-square rounded-xl overflow-hidden bg-[url('https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=400&q=80')] bg-cover bg-center"></div>
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            
+            <div class="space-y-6">
+                <div class="bg-slate-900 aspect-4/3 rounded-2xl flex items-center justify-center text-slate-500 text-xs uppercase tracking-widest font-mono p-8 text-center border border-slate-800 shadow-md">
+                    [Product Image Presentation Area: Minimalist Sliding Doors Framework]
+                </div>
+                <div class="grid grid-cols-3 gap-4">
+                    <div class="bg-white border p-4 rounded-xl text-center"><span class="block text-lg font-black text-blue-600">26mm</span><span class="text-[10px] text-slate-400 uppercase font-bold">Interlock View</span></div>
+                    <div class="bg-white border p-4 rounded-xl text-center"><span class="block text-lg font-black text-blue-600">3.0mm</span><span class="text-[10px] text-slate-400 uppercase font-bold">Profile Wall</span></div>
+                    <div class="bg-white border p-4 rounded-xl text-center"><span class="block text-lg font-black text-blue-600">PA66</span><span class="text-[10px] text-slate-400 uppercase font-bold">Thermal Break</span></div>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <h3 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Engineering Specifications & Structural Depth</h3>
+            <div class="bg-white border border-gray-200 p-8 rounded-2xl shadow-xs">
+                <span class="text-xs font-bold text-blue-600 uppercase tracking-wider block mb-2">Technical Matrix</span>
+                <h2 class="text-2xl font-black text-slate-900 uppercase tracking-tight">Slimline Sliding Glass Doors</h2>
                 
-                <div class="space-y-4 text-sm leading-relaxed text-slate-600">
+                <div class="mt-6 border-t border-gray-100 pt-6 space-y-4 text-xs sm:text-sm text-slate-600 leading-relaxed">
                     <p>
-                        Our <strong class="text-slate-900">Minimalist Sliding Doors</strong> represent the peak of structural aesthetics and modern window wall craftsmanship. Featuring an ultra-slim interlocking profile of only <span class="bg-blue-50 text-blue-700 font-mono px-1 py-0.5 rounded font-bold">26mm</span>, these doors maximize the visible glass plane area to provide unobstructed panoramic vistas while maintaining superior structural resistance.
+                        Our engineering-grade <strong class="text-slate-900">Minimalist Sliding Doors</strong> represent the apex of modern luxury fenestration. Built using high-tensile 6063-T5 structural aluminum alloys, these configurations support massive floor-to-ceiling glass panes without compromising structural deflection targets under extreme wind-loads.
                     </p>
                     <p>
-                        Constructed from heavy-duty <strong class="text-slate-900">6063-T5 aluminum extrusions</strong>, the perimeter frames incorporate reinforced multi-cavity thermal break barriers (PA66 nylon insulation strips). This guarantees exceptional heat insulation performance, drastically improving the overall building enclosure U-Factor and meeting strict localized building code insulation goals and Energy Star metrics across diverse climate zones.
+                        Equipped with imported top-tier stainless steel tandem rollers and continuous heavy-duty multi-point locking hardware, the operational glide remains ultra-smooth and silent across decades of high-frequency cycling. 
+                    </p>
+                    <p>
+                        The integrated extra-wide polyamide <strong class="text-slate-900">PA66 thermal insulation barrier</strong> effectively drops thermal transmittance coefficients, allowing architectural blueprints to easily restrict localized building code insulation goals and Energy Star metrics across diverse climate zones.
                     </p>
                     <p>
                         Whether your blueprint specifies an expansive <strong class="text-slate-900">Minimalist Aluminum Sliding Glass Doors</strong> structural facade or premium multi-panel <strong class="text-slate-900">Slimline Patio Door Systems</strong>, MFWCW guarantees 100% bespoke manufacturing. We provide full millwork drawing depth, RAL customized colors, and secure shipping directly to global jobsites.
@@ -140,33 +184,9 @@
 
                 <div class="mt-8">
                     <a href="#b2b-form"
-                        class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-8 py-3.5 rounded-lg uppercase tracking-wider transition">
-                        Get Instant Factory Quote
-                    </a>
+                        class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-8 py-3.5 rounded-lg uppercase tracking-wider transition">Get Instant Factory Quote</a>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <section id="b2b-form" class="py-16 bg-slate-100 border-t border-b border-slate-200 px-4">
-        <div class="max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200">
-            <div class="text-center mb-8">
-                <span class="bg-blue-100 text-blue-800 text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded">Direct Factory Liaison</span>
-                <h2 class="text-2xl font-black text-slate-900 mt-3 uppercase tracking-tight">Initiate Industrial RFQ / Price Study</h2>
-                <p class="text-xs text-slate-500 mt-1">Submit your architectural configuration parameters for institutional-grade commercial analysis.</p>
-            </div>
-            <form action="https://formspree.io/f/xpwqorze" method="POST" class="space-y-5">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input type="text" name="name" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800" placeholder="Contact Name *">
-                    <input type="text" name="company" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800" placeholder="Corporate Entity / Glazing Contractor">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input type="email" name="_replyto" required class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800" placeholder="Corporate Email *">
-                    <input type="tel" name="phone" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800" placeholder="WhatsApp / Mobile (With Country Code)">
-                </div>
-                <textarea name="message" required rows="5" class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs sm:text-sm bg-slate-50 focus:bg-white focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition outline-none text-slate-800" placeholder="Please elaborate on your technical parameters (e.g., Slimline door total span, configuration tracks, surface treatment anodized/powder, double Low-E requirement, etc)..."></textarea>
-                <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-lg uppercase text-xs tracking-wider transition">Dispatch Industrial RFQ</button>
-            </form>
         </div>
     </section>
 

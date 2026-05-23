@@ -9,10 +9,24 @@
     <script src="https://cdn.tailwindcss.com"></script>
 
     <style>
-        .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        #google_translate_element { display: none !important; }
-        .skiptranslate iframe, .goog-logo-link, .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        #google_translate_element {
+            display: none !important;
+        }
+
+        .skiptranslate iframe,
+        .goog-logo-link,
+        .goog-te-gadget span {
+            display: none !important;
+        }
     </style>
 
     <script type="text/javascript">
@@ -24,7 +38,8 @@
             }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    
+    <script type="text/javascript" src="https://www.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         function toggleLangDropdown() {
@@ -32,20 +47,27 @@
             menu.classList.toggle('hidden');
         }
 
-        // 模拟点击谷歌原生隐藏下拉框，实现地道母语+国旗切换
         function changeLanguage(langCode) {
-            const selectElem = document.querySelector('#google_translate_element select');
-            if (selectElem) {
-                selectElem.value = langCode;
-                // 触发原生 change 事件让谷歌翻译引擎开始工作
-                selectElem.dispatchEvent(new Event('change'));
+            try {
+                if (langCode === 'en') {
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.host;
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + location.hostname.split('.').slice(-2).join('.');
+                } else {
+                    const cookieValue = "/en/" + langCode;
+                    document.cookie = "googtrans=" + cookieValue + "; path=/;";
+                    document.cookie = "googtrans=" + cookieValue + "; path=/; domain=" + location.host;
+                    if (location.hostname.includes('.')) {
+                        document.cookie = "googtrans=" + cookieValue + "; path=/; domain=." + location.hostname.split('.').slice(-2).join('.');
+                    }
+                }
+                location.reload();
+            } catch (e) {
+                console.error("Cookie translation error:", e);
             }
-            // 切换语言后自动收起下拉菜单
-            document.getElementById('custom-lang-menu').classList.add('hidden');
         }
 
-        // 点击页面其他空白区域时，自动收起下拉菜单
-        window.addEventListener('click', function(e) {
+        window.addEventListener('click', function (e) {
             const btn = document.getElementById('lang-btn');
             const menu = document.getElementById('custom-lang-menu');
             if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
@@ -55,7 +77,7 @@
     </script>
 </head>
 
-<body class="bg-slate-50 text-slate-700 antialiased font-sans">
+<body class="bg-slate-50 text-slate-800 antialiased font-sans">
 
     <header class="sticky top-0 bg-white/95 backdrop-blur shadow-sm z-50 border-b border-gray-100">
         <div id="google_translate_element"></div>
@@ -65,7 +87,7 @@
                 <a href="index.html" class="text-2xl font-black tracking-wider text-blue-600">MFWCW</a>
                 <span class="text-xs text-gray-400 border-l pl-2 border-gray-300 uppercase hidden sm:inline tracking-wider font-semibold">Miao Feng Source Factory</span>
             </div>
-            
+
             <nav class="hidden lg:flex space-x-6 font-semibold text-gray-600 text-sm">
                 <a href="index.html" class="hover:text-blue-600 transition">HOME</a>
                 <a href="star-product.html" class="hover:text-blue-600 transition">Star Product</a>
@@ -73,103 +95,118 @@
                 <a href="factory-quality.html" class="hover:text-blue-600 transition">Factory & Quality</a>
                 <a href="contact.html" class="hover:text-blue-600 transition">Contact Us</a>
             </nav>
-            
+
             <div class="flex items-center gap-4">
                 <div class="relative">
-                    <button id="lang-btn" onclick="toggleLangDropdown()" class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-3 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 transition outline-none">
+                    <button id="lang-btn" onclick="toggleLangDropdown()"
+                        class="bg-gray-100 hover:bg-gray-200 border border-gray-200 text-gray-700 px-3 py-2 rounded-full font-bold text-xs flex items-center gap-1.5 transition outline-none">
                         <span>🌐</span>
                         <span>Language</span>
-                        <svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        <svg class="w-3 h-3 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                        </svg>
                     </button>
 
                     <div id="custom-lang-menu" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-xl shadow-xl hidden z-50 py-1.5">
-                        <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇺🇸 English (US)</button>
-                        <button onclick="changeLanguage('zh-CN')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇨🇳 简体中文</button>
-                        <button onclick="changeLanguage('es')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇪🇸 Español</button>
-                        <button onclick="changeLanguage('fr')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇫🇷 Français</button>
-                        <button onclick="changeLanguage('de')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇩🇪 Deutsch</button>
-                        <button onclick="changeLanguage('it')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇮🇹 Italiano</button>
-                        <button onclick="changeLanguage('nl')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">🇳🇱 Nederlands</button>
+                        <button onclick="changeLanguage('en')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇺🇸</span> English (US)
+                        </button>
+                        <button onclick="changeLanguage('zh-CN')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇨🇳 </span> 简体中文
+                        </button>
+                        <button onclick="changeLanguage('es')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇪🇸</span> Español
+                        </button>
+                        <button onclick="changeLanguage('fr')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇫🇷</span> Français
+                        </button>
+                        <button onclick="changeLanguage('de')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇩🇪</span> Deutsch
+                        </button>
+                        <button onclick="changeLanguage('it')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇮🇹</span> Italiano
+                        </button>
+                        <button onclick="changeLanguage('nl')" class="w-full text-left px-4 py-2 text-xs font-semibold text-gray-700 hover:bg-blue-50 flex items-center gap-2">
+                            <span class="text-base">🇳🇱</span> Nederlands
+                        </button>
                     </div>
                 </div>
 
-                <a href="https://wa.me/8618022775361" target="_blank" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold text-xs uppercase tracking-wider hidden sm:flex">
+                <a href="https://wa.me/8618022775361" target="_blank"
+                    class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-full font-semibold flex items-center gap-1.5 shadow-sm transition text-xs uppercase tracking-wider hidden sm:flex">
                     WhatsApp
                 </a>
             </div>
         </div>
     </header>
 
-    <section class="bg-slate-900 text-white py-16 px-4">
-        <div class="max-w-4xl mx-auto text-center">
-            <span class="text-blue-500 text-xs font-bold uppercase tracking-widest block mb-3">Institutional Grade Glazing</span>
-            <h1 class="text-3xl sm:text-5xl font-black uppercase tracking-tight">Full-Scale Product Portfolio</h1>
-            <p class="mt-4 text-sm text-slate-400 max-w-xl mx-auto">Explore our structural-grade aluminum series optimized for heavy architectural loads, thermal efficiency, and modern luxury layouts.</p>
+    <section class="py-16 bg-white border-b px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <span class="text-blue-600 text-xs font-bold uppercase tracking-widest bg-blue-50 px-2.5 py-1 rounded">B2B Product Extension</span>
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mt-4 uppercase">More Glazing Engineering Solutions</h1>
+            <p class="text-slate-500 text-xs sm:text-sm mt-2 max-w-xl mx-auto">Beyond our flagship slimline series, MFWCW manufactures an extensive array of heavy commercial fenestration systems.</p>
         </div>
     </section>
 
-    <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
             
-            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div class="bg-slate-100 aspect-[16/9] rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
-                    [Category Image: Sliding Door Series]
+            <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs flex flex-col justify-between">
+                <div class="bg-slate-100 aspect-16/9 rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
+                    [Category Image: Heavy-Duty Lift-and-Slide Doors]
                 </div>
                 <div>
-                    <h3 class="text-lg font-black text-slate-900 uppercase">01. Heavy-Duty Sliding Door Matrix</h3>
-                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Engineered with multi-track structural depths and perimeter thermal barriers for sweeping panoramic layouts.</p>
+                    <h3 class="text-lg font-black text-slate-900 uppercase">01. Heavy-Duty Lift-and-Slide Doors</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Engineered for large-span openings demanding specialized sealing. The lever mechanism lifts the entire panel off the gasket track for frictionless sliding action.</p>
                     <ul class="mt-4 space-y-1.5 text-xs font-mono text-slate-600 border-t pt-3 border-gray-200">
-                        <li>• 16 Ultra-Slim Minimalist Sliding Glass Door</li>
-                        <li>• 68 / 73 / 100 Heavy-Duty Lift-and-Slide Systems</li>
-                        <li>• 120 & 150 Ultra-Slim Profile Multi-Track Systems</li>
+                        <li>• 120 / 160 Premium Architectural Series</li>
+                        <li>• Structural Wall Thickness: Up to 3.0mm</li>
+                        <li>• Support Single Panel Weight Exceeding 400kg</li>
                     </ul>
                 </div>
                 <div class="mt-6">
-                    <a href="index.html#b2b-form"
-                        class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
+                    <a href="index.html#b2b-form" class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
                 </div>
             </div>
 
-            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div class="bg-slate-100 aspect-[16/9] rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
-                    [Category Image: Folding Door Series]
+            <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs flex flex-col justify-between">
+                <div class="bg-slate-100 aspect-16/9 rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
+                    [Category Image: Thermal Break Bi-Folding Doors]
                 </div>
                 <div>
-                    <h3 class="text-lg font-black text-slate-900 uppercase">02. Panoramic Folding Patio Doors</h3>
-                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Heavy-load hardware configurations supporting expansive opening transitions with robust weather sealing barriers.</p>
+                    <h3 class="text-lg font-black text-slate-900 uppercase">02. Thermal Break Bi-Folding Doors</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Maximize physical space ventilation by folding panels completely to the sides. Ideal for luxury patio thresholds and open-air upscale restaurants.</p>
                     <ul class="mt-4 space-y-1.5 text-xs font-mono text-slate-600 border-t pt-3 border-gray-200">
-                        <li>• 18 Ultra-Slim Line Architectural Folding System</li>
-                        <li>• 50 / 68 / 75 Insulated Glass Folding Systems</li>
-                        <li>• 80 & 120 Heavy-Duty Commercial Folding Systems</li>
+                        <li>• Heavy Bottom-Rolling Structural Carriage Guide</li>
+                        <li>• Flexible Panel Matrix: 330, 431, 550, 633 Arrays</li>
+                        <li>• Complete Weather-Stripping Compression Gaskets</li>
                     </ul>
                 </div>
                 <div class="mt-6">
-                    <a href="index.html#b2b-form"
-                        class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
+                    <a href="index.html#b2b-form" class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
                 </div>
             </div>
 
-            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div class="bg-slate-100 aspect-[16/9] rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
-                    [Category Image: Hinged Door Series]
+            <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs flex flex-col justify-between">
+                <div class="bg-slate-100 aspect-16/9 rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
+                    [Category Image: Luxury System Casement Windows]
                 </div>
                 <div>
-                    <h3 class="text-lg font-black text-slate-900 uppercase">03. Architectural Hinged & Pivot Doors</h3>
-                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">Precision entry configurations including minimalist interior glass panels and grand scaled structural pivots.</p>
+                    <h3 class="text-lg font-black text-slate-900 uppercase">03. Luxury System Casement Windows</h3>
+                    <p class="text-xs text-slate-500 mt-2 leading-relaxed">High-performance outbound or inward swinging windows featuring multi-point hidden locking nodes. Exceptional acoustic dampening targets.</p>
                     <ul class="mt-4 space-y-1.5 text-xs font-mono text-slate-600 border-t pt-3 border-gray-200">
-                        <li>• 18 Ultra-Slim Profile Interior Glass Hinged Door</li>
-                        <li>• 30 / 48 Narrow Profile Precision Swing Systems</li>
-                        <li>• Heavy-Duty Front Entry Pivot Doors & French Systems</li>
+                        <li>• Integrated Heavy Stainless Flyscreens / Security Meshes</li>
+                        <li>• Multi-Cavity Insulation Profile Design Fillings</li>
+                        <li>• Double / Triple Argons filled Low-E Glazing Packs</li>
                     </ul>
                 </div>
                 <div class="mt-6">
-                    <a href="index.html#b2b-form"
-                        class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
+                    <a href="index.html#b2b-form" class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
                 </div>
             </div>
 
-            <div class="bg-white p-6 sm:p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div class="bg-slate-100 aspect-[16/9] rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
+            <div class="bg-white border border-gray-200 p-6 rounded-2xl shadow-xs flex flex-col justify-between">
+                <div class="bg-slate-100 aspect-16/9 rounded-xl flex items-center justify-center text-slate-400 text-xs uppercase tracking-wider mb-4 shadow-inner">
                     [Category Image: Window Systems Series]
                 </div>
                 <div>
@@ -182,8 +219,7 @@
                     </ul>
                 </div>
                 <div class="mt-6">
-                    <a href="index.html#b2b-form"
-                        class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
+                    <a href="index.html#b2b-form" class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-[11px] px-4 py-2 rounded uppercase tracking-wider transition">Inquire This Line</a>
                 </div>
             </div>
 

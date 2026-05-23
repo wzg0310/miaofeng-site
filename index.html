@@ -23,7 +23,6 @@
             display: none !important;
         }
 
-        /* 彻底隐藏原生组件 */
         .skiptranslate iframe,
         .goog-logo-link,
         .goog-te-gadget span {
@@ -49,31 +48,32 @@
             menu.classList.toggle('hidden');
         }
 
-        // 核心修复 3：强化语言切换模拟，完美联动隐藏的原生下拉框
+        // 核心修复：通过直接操作谷歌翻译核心 Cookie 来切换语言，再也不依赖 select 节点，彻底告别报错
         function changeLanguage(langCode) {
-            const selectElem = document.querySelector('#google_translate_element select');
-            
-            if (selectElem) {
-                selectElem.value = langCode;
-                
-                // 兼容所有现代浏览器内核触发原生 change 翻译事件
-                if (typeof Event === 'function') {
-                    selectElem.dispatchEvent(new Event('change', { bubbles: true }));
+            try {
+                // 英文是页面母语，如果是 en，直接清空翻译 Cookie 恢复原文
+                if (langCode === 'en') {
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.host;
+                    document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + location.hostname.split('.').slice(-2).join('.');
                 } else {
-                    const event = document.createEvent('Event');
-                    event.initEvent('change', true, true);
-                    selectElem.dispatchEvent(event);
+                    // 其他语言直接写入谷歌标准的路径 Cookie：/页面母语/目标语言
+                    const cookieValue = "/en/" + langCode;
+                    document.cookie = "googtrans=" + cookieValue + "; path=/;";
+                    document.cookie = "googtrans=" + cookieValue + "; path=/; domain=" + location.host;
+                    // 兼容带主域名的多级域名
+                    if (location.hostname.includes('.')) {
+                        document.cookie = "googtrans=" + cookieValue + "; path=/; domain=." + location.hostname.split('.').slice(-2).join('.');
+                    }
                 }
-            } else {
-                console.warn("Google Translate core is not fully loaded or wrapper element missing.");
-                alert("Translation engine is still loading or blocked. Please make sure you are previewing via a server environment or check your proxy.");
+                // 刷新页面，让谷歌翻译引擎读取新 Cookie 并强制翻译
+                location.reload();
+            } catch (e) {
+                console.error("Cookie translation error:", e);
             }
-            
-            // 切换语言后自动收起下拉菜单
-            document.getElementById('custom-lang-menu').classList.add('hidden');
         }
 
-        // 点击页面其他空白区域时，自动收起下拉菜单
+        // 点击空白处自动收起菜单
         window.addEventListener('click', function (e) {
             const btn = document.getElementById('lang-btn');
             const menu = document.getElementById('custom-lang-menu');
@@ -323,52 +323,4 @@
                 <h2 class="text-2xl font-black text-slate-900 mt-3 uppercase tracking-tight">Initiate Industrial RFQ /
                     Price Study</h2>
             </div>
-            <form action="https://formspree.io/f/YOUR_FORMSPREE_ID_HERE" method="POST" class="space-y-5">
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input type="text" name="name" required
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                        placeholder="Contact Name *">
-                    <input type="text" name="company"
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                        placeholder="Corporate Entity">
-                </div>
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <input type="email" name="_replyto" required
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                        placeholder="Corporate Email *">
-                    <input type="tel" name="phone"
-                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                        placeholder="WhatsApp / Mobile">
-                </div>
-                <textarea name="message" required rows="4"
-                    class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-xs sm:text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                    placeholder="Detailed Technical Request (Profile thickness, hardware preference, double Low-E requirement, etc)..."></textarea>
-                <button type="submit"
-                    class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3.5 rounded-lg uppercase text-xs tracking-wider transition">Dispatch
-                    Industrial RFQ</button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 text-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-                <h4 class="text-white font-bold text-base mb-4">MFWCW Materials</h4>
-                <p class="text-xs">Foshan Miaofeng Building Materials Co., Ltd. is a premier audited enterprise
-                    specializing in industrial-grade exterior glazing solutions.</p>
-            </div>
-            <div>
-                <h4 class="text-white font-bold text-base mb-4">B2B Channels</h4>
-                <p class="text-xs">Email: zeck@miaofengwindows.com<br>WhatsApp: +86 180 2277 5361<br>WeChat ID:
-                    MiaoFeng2305</p>
-            </div>
-            <div>
-                <h4 class="text-white font-bold text-base mb-4">SEO Domain Matrix</h4>
-                <p class="text-xs text-blue-400 font-mono">ultraslimslidingdoor.cc.cd</p>
-                <p class="text-[10px] text-slate-600 mt-4">&copy; 2026 MFWCW. All Rights Reserved.</p>
-            </div>
-        </div>
-    </footer>
-</body>
-
-</html>
+            <form action="https://formspree
