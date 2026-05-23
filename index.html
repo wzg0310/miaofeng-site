@@ -41,7 +41,7 @@
         }
     </script>
     
-    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="https://www.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         function toggleLangDropdown() {
@@ -49,15 +49,14 @@
             menu.classList.toggle('hidden');
         }
 
-        // 终极修复：增加多层容错机制，确保 100% 模拟触发原生翻译事件
+        // 核心修复 3：强化语言切换模拟，完美联动隐藏的原生下拉框
         function changeLanguage(langCode) {
-            // 准确定位谷歌翻译引擎在 DOM 中自动生成的 select 标签
             const selectElem = document.querySelector('#google_translate_element select');
             
             if (selectElem) {
                 selectElem.value = langCode;
                 
-                // 针对不同浏览器内核，同时触发 change 和 click 事件，确保引擎响应
+                // 兼容所有现代浏览器内核触发原生 change 翻译事件
                 if (typeof Event === 'function') {
                     selectElem.dispatchEvent(new Event('change', { bubbles: true }));
                 } else {
@@ -66,9 +65,8 @@
                     selectElem.dispatchEvent(event);
                 }
             } else {
-                // 如果本地未加载成功，控制台打印提示，方便按下面的排查步骤诊断
-                console.warn("Google Translate widget is initializing or blocked by your current network environment.");
-                alert("Translation engine is still loading or blocked by network. Please check your internet connection.");
+                console.warn("Google Translate core is not fully loaded or wrapper element missing.");
+                alert("Translation engine is still loading or blocked. Please make sure you are previewing via a server environment or check your proxy.");
             }
             
             // 切换语言后自动收起下拉菜单
