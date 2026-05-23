@@ -31,41 +31,6 @@
         }
     </style>
 
-    <script type="text/javascript"
-        src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit">
-            function googleTranslateElementInit() {
-                new google.translate.TranslateElement({
-                    pageLanguage: 'en',
-                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
-                    autoDisplay: false
-                }, 'google_translate_element');
-            }
-        </script>
-    <script type="text/javascript"
-        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
-
-    <style>
-        .goog-te-banner-frame.skiptranslate,
-        .goog-te-banner-frame {
-            display: none !important;
-        }
-
-        body {
-            top: 0px !important;
-        }
-
-        #google_translate_element {
-            display: none !important;
-        }
-
-        /* 彻底隐藏原生组件 */
-        .skiptranslate iframe,
-        .goog-logo-link,
-        .goog-te-gadget span {
-            display: none !important;
-        }
-    </style>
-
     <script type="text/javascript">
         function googleTranslateElementInit() {
             new google.translate.TranslateElement({
@@ -75,8 +40,7 @@
             }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript"
-        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+    <script type="text/javascript" src="https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
     <script>
         function toggleLangDropdown() {
@@ -91,6 +55,8 @@
                 selectElem.value = langCode;
                 // 触发原生 change 事件让谷歌翻译引擎开始工作
                 selectElem.dispatchEvent(new Event('change'));
+            } else {
+                console.error("Google Translate element not initialized yet.");
             }
             // 切换语言后自动收起下拉菜单
             document.getElementById('custom-lang-menu').classList.add('hidden');
@@ -337,7 +303,7 @@
         </div>
     </section>
 
-    <section id="b2b-form" class="bg-slate-50 py-20 px-4 border-t border-gray-200">
+    <section class="bg-slate-50 py-20 px-4 border-t border-gray-200">
         <div class="max-w-3xl mx-auto bg-white p-8 sm:p-10 rounded-2xl shadow-xl border border-gray-200">
             <div class="text-center mb-8">
                 <span
