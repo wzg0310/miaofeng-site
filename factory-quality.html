@@ -1,25 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Factory Production Capacity & QA Controls | MFWCW Foshan</title>
-    <meta name="description" content="Tour our 107,000 sq.ft advanced manufacturing infrastructure. Inspect our engineering quality assurance protocols, structural debugging stands, and international packing standards.">
+    <meta name="description"
+        content="Tour our 107,000 sq.ft advanced manufacturing infrastructure. Inspect our engineering quality assurance protocols, structural debugging stands, and international packing standards.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'zh-CN,en,fr,de,es,it,nl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'zh-CN,en,fr,de,es,it,nl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <style>
-        .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        .goog-te-gadget { font-family: inherit !important; font-size: 0px !important; }
-        #google_translate_element select { background-color: #f3f4f6; border: 1px solid #e5e7eb; color: #374151; padding: 6px 32px 6px 12px; border-radius: 9999px; font-weight: 600; font-size: 12px; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none; }
-        .skiptranslate iframe, .goog-logo-link, .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        #google_translate_element {
+            display: none !important;
+        }
+
+        /* 彻底隐藏原生组件 */
+        .skiptranslate iframe,
+        .goog-logo-link,
+        .goog-te-gadget span {
+            display: none !important;
+        }
     </style>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        function toggleLangDropdown() {
+            const menu = document.getElementById('custom-lang-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 模拟点击谷歌原生隐藏下拉框，实现地道母语+国旗切换
+        function changeLanguage(langCode) {
+            const selectElem = document.querySelector('#google_translate_element select');
+            if (selectElem) {
+                selectElem.value = langCode;
+                // 触发原生 change 事件让谷歌翻译引擎开始工作
+                selectElem.dispatchEvent(new Event('change'));
+            }
+            // 切换语言后自动收起下拉菜单
+            document.getElementById('custom-lang-menu').classList.add('hidden');
+        }
+
+        // 点击页面其他空白区域时，自动收起下拉菜单
+        window.addEventListener('click', function (e) {
+            const btn = document.getElementById('lang-btn');
+            const menu = document.getElementById('custom-lang-menu');
+            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
 </head>
+
 <body class="bg-white text-gray-800 antialiased font-sans">
 
     <header class="sticky top-0 bg-white/95 backdrop-blur shadow-sm z-50 border-b border-gray-100">
@@ -31,7 +87,9 @@
                 <a href="index.html" class="hover:text-blue-600 transition">HOME</a>
                 <a href="star-product.html" class="hover:text-blue-600 transition">Star Product</a>
                 <a href="more-products.html" class="hover:text-blue-600 transition">More Products</a>
-                <a href="factory-quality.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Factory & Quality</a>
+                <a href="factory-quality.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Factory &
+                    Quality</a>
+                <a href="contact.html" class="hover:text-blue-600 transition">Contact Us</a>
             </nav>
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-1.5 relative">
@@ -44,23 +102,34 @@
     <section class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
             <span class="text-blue-600 text-xs font-bold uppercase tracking-wider">Industrial Strength</span>
-            <h1 class="text-3xl font-black text-slate-900 mt-2 uppercase">Manufacturing Base & Quality Control Framework</h1>
+            <h1 class="text-3xl font-black text-slate-900 mt-2 uppercase">Manufacturing Base & Quality Control Framework
+            </h1>
         </div>
 
         <div class="space-y-12">
             <div class="bg-slate-50 p-6 rounded-xl border border-gray-200">
                 <h3 class="text-base font-bold text-slate-900 uppercase">1. Advanced Extrusion & Fabrication Plant</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">Our infrastructure in Foshan encompasses over 107,000 square feet of optimized workshop areas. Utilizing advanced precision double-head cutting saws and automated CNC machining milling platforms, we assure linear and structural corner tolerances stay tightly below strict professional thresholds.</p>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">Our infrastructure in Foshan encompasses over
+                    107,000 square feet of optimized workshop areas. Utilizing advanced precision double-head cutting
+                    saws and automated CNC machining milling platforms, we assure linear and structural corner
+                    tolerances stay tightly below strict professional thresholds.</p>
             </div>
 
             <div class="bg-slate-50 p-6 rounded-xl border border-gray-200">
                 <h3 class="text-base font-bold text-slate-900 uppercase">2. Rigorous Pre-Shipment Debugging Stands</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">To remove structural flaws prior to ocean shipping, MFWCW operates dedicated full scale product debugging lines. All windows and sliding frames undergo physical leveling, weather-seal consistency checks, and manual glide actuation friction audits.</p>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">To remove structural flaws prior to ocean
+                    shipping, MFWCW operates dedicated full scale product debugging lines. All windows and sliding
+                    frames undergo physical leveling, weather-seal consistency checks, and manual glide actuation
+                    friction audits.</p>
             </div>
 
             <div class="bg-slate-50 p-6 rounded-xl border border-gray-200">
-                <h3 class="text-base font-bold text-slate-900 uppercase">3. ISPM-15 Certified Ocean Transit Heavy Packaging</h3>
-                <p class="text-xs text-slate-600 mt-2 leading-relaxed">Glazing materials demand rugged protection. Our logistics bay strictly uses heavy non-fumigation plywood crates built with integrated heavy forklift base runner structures. Multi-layer shock protection films prevent scratching, ensuring clean arrivals directly to jobsites.</p>
+                <h3 class="text-base font-bold text-slate-900 uppercase">3. ISPM-15 Certified Ocean Transit Heavy
+                    Packaging</h3>
+                <p class="text-xs text-slate-600 mt-2 leading-relaxed">Glazing materials demand rugged protection. Our
+                    logistics bay strictly uses heavy non-fumigation plywood crates built with integrated heavy forklift
+                    base runner structures. Multi-layer shock protection films prevent scratching, ensuring clean
+                    arrivals directly to jobsites.</p>
             </div>
         </div>
     </section>
@@ -69,4 +138,5 @@
         <p>&copy; 2026 MFWCW Materials. ISO 9001 Certified OEM/ODM Fenestration Supplier.</p>
     </footer>
 </body>
+
 </html>

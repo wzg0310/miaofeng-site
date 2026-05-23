@@ -1,26 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minimalist Slimline Sliding Glass Doors | Premium Patio Systems MFWCW</title>
-    <meta name="description" content="Explore our ultra engineering-grade Minimalist Sliding Doors and Slimline Sliding Glass Doors. Engineered with 26mm visible profiles, heavy-duty structural loading, and high-performance thermal break insulation for high-end real estate developments.">
+    <meta name="description"
+        content="Explore our ultra engineering-grade Minimalist Sliding Doors and Slimline Sliding Glass Doors. Engineered with 26mm visible profiles, heavy-duty structural loading, and high-performance thermal break insulation for high-end real estate developments.">
     <script src="https://cdn.tailwindcss.com"></script>
     <script type="text/javascript">
         function googleTranslateElementInit() {
-            new google.translate.TranslateElement({pageLanguage: 'en', includedLanguages: 'zh-CN,en,fr,de,es,it,nl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false}, 'google_translate_element');
+            new google.translate.TranslateElement({ pageLanguage: 'en', includedLanguages: 'zh-CN,en,fr,de,es,it,nl', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, autoDisplay: false }, 'google_translate_element');
         }
     </script>
-    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
     <style>
-        .goog-te-banner-frame.skiptranslate, .goog-te-banner-frame { display: none !important; }
-        body { top: 0px !important; }
-        .goog-te-gadget { font-family: inherit !important; font-size: 0px !important; }
-        #google_translate_element select { background-color: #f3f4f6; border: 1px solid #e5e7eb; color: #374151; padding: 6px 32px 6px 12px; border-radius: 9999px; font-weight: 600; font-size: 12px; outline: none; cursor: pointer; appearance: none; -webkit-appearance: none; }
-        #google_translate_element select:hover { background-color: #e5e7eb; border-color: #3b82f6; }
-        .skiptranslate iframe, .goog-logo-link, .goog-te-gadget span { display: none !important; }
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        #google_translate_element {
+            display: none !important;
+        }
+
+        /* 彻底隐藏原生组件 */
+        .skiptranslate iframe,
+        .goog-logo-link,
+        .goog-te-gadget span {
+            display: none !important;
+        }
     </style>
+
+    <style>
+        .goog-te-banner-frame.skiptranslate,
+        .goog-te-banner-frame {
+            display: none !important;
+        }
+
+        body {
+            top: 0px !important;
+        }
+
+        #google_translate_element {
+            display: none !important;
+        }
+
+        /* 彻底隐藏原生组件 */
+        .skiptranslate iframe,
+        .goog-logo-link,
+        .goog-te-gadget span {
+            display: none !important;
+        }
+    </style>
+
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE,
+                autoDisplay: false
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+        src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+    <script>
+        function toggleLangDropdown() {
+            const menu = document.getElementById('custom-lang-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // 模拟点击谷歌原生隐藏下拉框，实现地道母语+国旗切换
+        function changeLanguage(langCode) {
+            const selectElem = document.querySelector('#google_translate_element select');
+            if (selectElem) {
+                selectElem.value = langCode;
+                // 触发原生 change 事件让谷歌翻译引擎开始工作
+                selectElem.dispatchEvent(new Event('change'));
+            }
+            // 切换语言后自动收起下拉菜单
+            document.getElementById('custom-lang-menu').classList.add('hidden');
+        }
+
+        // 点击页面其他空白区域时，自动收起下拉菜单
+        window.addEventListener('click', function (e) {
+            const btn = document.getElementById('lang-btn');
+            const menu = document.getElementById('custom-lang-menu');
+            if (btn && menu && !btn.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.add('hidden');
+            }
+        });
+    </script>
 </head>
+
 <body class="bg-white text-gray-800 antialiased font-sans">
 
     <header class="sticky top-0 bg-white/95 backdrop-blur shadow-sm z-50 border-b border-gray-100">
@@ -30,15 +107,17 @@
             </div>
             <nav class="hidden lg:flex space-x-6 font-semibold text-gray-600 text-sm">
                 <a href="index.html" class="hover:text-blue-600 transition">HOME</a>
-                <a href="star-product.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">Star Product</a>
-                <a href="more-products.html" class="hover:text-blue-600 transition">More Products</a>
+                <a href="star-product.html" class="hover:text-blue-600 transition">Star Product</a>
+                <a href="more-products.html" class="text-blue-600 border-b-2 border-blue-600 pb-1">More Products</a>
                 <a href="factory-quality.html" class="hover:text-blue-600 transition">Factory & Quality</a>
+                <a href="contact.html" class="hover:text-blue-600 transition">Contact Us</a>
             </nav>
             <div class="flex items-center gap-4">
                 <div class="flex items-center gap-1.5 relative">
                     <div id="google_translate_element"></div>
                 </div>
-                <a href="https://wa.me/8618022775361" target="_blank" class="bg-green-500 text-white px-4 py-2 rounded-full font-semibold text-xs uppercase">WhatsApp</a>
+                <a href="https://wa.me/8618022775361" target="_blank"
+                    class="bg-green-500 text-white px-4 py-2 rounded-full font-semibold text-xs uppercase">WhatsApp</a>
             </div>
         </div>
     </header>
@@ -46,49 +125,84 @@
     <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             <div class="space-y-4">
-                <div class="bg-slate-100 aspect-[4/3] rounded-2xl border border-gray-200 flex items-center justify-center font-bold text-slate-400 text-sm uppercase tracking-wider shadow-inner">
+                <div
+                    class="bg-slate-100 aspect-[4/3] rounded-2xl border border-gray-200 flex items-center justify-center font-bold text-slate-400 text-sm uppercase tracking-wider shadow-inner">
                     [Featured 16 Series Minimalist Sliding Doors Showcase]
                 </div>
                 <div class="grid grid-cols-3 gap-4">
-                    <div class="bg-slate-100 aspect-square rounded-xl border flex items-center justify-center text-[10px] uppercase text-slate-400 font-bold">[Profile cross-section]</div>
-                    <div class="bg-slate-100 aspect-square rounded-xl border flex items-center justify-center text-[10px] uppercase text-slate-400 font-bold">[Interlock detail]</div>
-                    <div class="bg-slate-100 aspect-square rounded-xl border flex items-center justify-center text-[10px] uppercase text-slate-400 font-bold">[Hardware roller track]</div>
+                    <div
+                        class="bg-slate-100 aspect-square rounded-xl border flex items-center justify-center text-[10px] uppercase text-slate-400 font-bold">
+                        [Profile cross-section]</div>
+                    <div
+                        class="bg-slate-100 aspect-square rounded-xl border flex items-center justify-center text-[10px] uppercase text-slate-400 font-bold">
+                        [Interlock detail]</div>
+                    <div
+                        class="bg-slate-100 aspect-square rounded-xl border flex items-center justify-center text-[10px] uppercase text-slate-400 font-bold">
+                        [Hardware roller track]</div>
                 </div>
             </div>
 
             <div>
-                <span class="bg-blue-100 text-blue-800 text-xs font-black px-3 py-1 rounded uppercase tracking-wider">Engineering Flagship</span>
+                <span
+                    class="bg-blue-100 text-blue-800 text-xs font-black px-3 py-1 rounded uppercase tracking-wider">Engineering
+                    Flagship</span>
                 <h1 class="text-3xl sm:text-4xl font-black text-slate-900 mt-3 uppercase tracking-tight leading-tight">
                     Premium Slimline Sliding Glass Door & Minimalist Patio Doors
                 </h1>
                 <p class="mt-4 text-slate-600 text-sm leading-relaxed">
-                    Our architectural-grade <strong class="text-slate-900">Minimalist Sliding Doors</strong> represent the peak of modern fenestration engineering. Specially optimized for high-end residential developments across North America and Europe, these premium <strong class="text-slate-900">Slimline Sliding Glass Door</strong> configurations offer commercial buyers an uncompromising combination of breathtaking glass layout areas and heavy-duty mechanical reliability.
+                    Our architectural-grade <strong class="text-slate-900">Minimalist Sliding Doors</strong> represent
+                    the peak of modern fenestration engineering. Specially optimized for high-end residential
+                    developments across North America and Europe, these premium <strong class="text-slate-900">Slimline
+                        Sliding Glass Door</strong> configurations offer commercial buyers an uncompromising combination
+                    of breathtaking glass layout areas and heavy-duty mechanical reliability.
                 </p>
 
                 <div class="mt-6 grid grid-cols-2 gap-4 border-y border-gray-200 py-4 text-xs font-mono">
-                    <div><span class="text-slate-400 block font-sans">Interlock Visible Face:</span> <strong class="text-slate-900 text-sm">26mm (Ultra-Slim Profile)</strong></div>
-                    <div><span class="text-slate-400 block font-sans">Aluminum Thickness:</span> <strong class="text-slate-900 text-sm">2.0mm - 3.0mm Structural Heavy</strong></div>
-                    <div><span class="text-slate-400 block font-sans">Glazing Cavity Option:</span> <strong class="text-slate-900 text-sm">Double/Triple Low-E Argon</strong></div>
-                    <div><span class="text-slate-400 block font-sans">Max Sash Weight Capacity:</span> <strong class="text-slate-900 text-sm">Up to 400 KG / Sash</strong></div>
+                    <div><span class="text-slate-400 block font-sans">Interlock Visible Face:</span> <strong
+                            class="text-slate-900 text-sm">26mm (Ultra-Slim Profile)</strong></div>
+                    <div><span class="text-slate-400 block font-sans">Aluminum Thickness:</span> <strong
+                            class="text-slate-900 text-sm">2.0mm - 3.0mm Structural Heavy</strong></div>
+                    <div><span class="text-slate-400 block font-sans">Glazing Cavity Option:</span> <strong
+                            class="text-slate-900 text-sm">Double/Triple Low-E Argon</strong></div>
+                    <div><span class="text-slate-400 block font-sans">Max Sash Weight Capacity:</span> <strong
+                            class="text-slate-900 text-sm">Up to 400 KG / Sash</strong></div>
                 </div>
 
                 <div class="mt-6 space-y-4 text-xs text-slate-600 leading-relaxed">
                     <p>
-                        As an experienced source factory in Foshan, we engineered the <strong class="text-slate-900">Slim Profile Aluminum Sliding Doors</strong> with premium architectural T6063 aluminum alloys. This heavy structure ensures that our specialized <strong class="text-slate-900">Slim Frame Patio Doors</strong> can support monumental structural glass openings without bowing or sacrificing water-tight integrity. 
+                        As an experienced source factory in Foshan, we engineered the <strong
+                            class="text-slate-900">Slim Profile Aluminum Sliding Doors</strong> with premium
+                        architectural T6063 aluminum alloys. This heavy structure ensures that our specialized <strong
+                            class="text-slate-900">Slim Frame Patio Doors</strong> can support monumental structural
+                        glass openings without bowing or sacrificing water-tight integrity.
                     </p>
                     <p>
-                        When deploying a large-scale <strong class="text-slate-900">Sliding Glass Wall System</strong> or multi-panel configurations, commercial contractors heavily appreciate our smooth roller systems. The integrated <strong class="text-slate-900">Slim Multi-Slide Glass Doors</strong> feature heavy-duty stainless steel tracks and custom German-engineered anti-wear rollers, delivering an effortlessly light hand-glide motion even under extreme windload pressures.
+                        When deploying a large-scale <strong class="text-slate-900">Sliding Glass Wall System</strong>
+                        or multi-panel configurations, commercial contractors heavily appreciate our smooth roller
+                        systems. The integrated <strong class="text-slate-900">Slim Multi-Slide Glass Doors</strong>
+                        feature heavy-duty stainless steel tracks and custom German-engineered anti-wear rollers,
+                        delivering an effortlessly light hand-glide motion even under extreme windload pressures.
                     </p>
                     <p>
-                        Furthermore, our <strong class="text-slate-900">Minimalist Patio Doors</strong> and <strong class="text-slate-900">Minimalist Multi-Slide</strong> solutions incorporate high-performance PA66 structural polyamide thermal barriers. This specialized insulation setup successfully prevents radiant heat transfer, helping your projects achieve strict localized building code insulation goals and Energy Star metrics across diverse climate zones.
+                        Furthermore, our <strong class="text-slate-900">Minimalist Patio Doors</strong> and <strong
+                            class="text-slate-900">Minimalist Multi-Slide</strong> solutions incorporate
+                        high-performance PA66 structural polyamide thermal barriers. This specialized insulation setup
+                        successfully prevents radiant heat transfer, helping your projects achieve strict localized
+                        building code insulation goals and Energy Star metrics across diverse climate zones.
                     </p>
                     <p>
-                        Whether your blueprint specifies an expansive <strong class="text-slate-900">Minimalist Aluminum Sliding Glass Doors</strong> structural facade or premium multi-panel <strong class="text-slate-900">Slimline Patio Door Systems</strong>, MFWCW guarantees 100% bespoke manufacturing. We provide full millwork drawing depth, RAL customized colors, and secure shipping directly to global jobsites.
+                        Whether your blueprint specifies an expansive <strong class="text-slate-900">Minimalist Aluminum
+                            Sliding Glass Doors</strong> structural facade or premium multi-panel <strong
+                            class="text-slate-900">Slimline Patio Door Systems</strong>, MFWCW guarantees 100% bespoke
+                        manufacturing. We provide full millwork drawing depth, RAL customized colors, and secure
+                        shipping directly to global jobsites.
                     </p>
                 </div>
 
                 <div class="mt-8">
-                    <a href="#b2b-form" class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-8 py-3.5 rounded-lg uppercase tracking-wider transition">Get Instant Factory Quote</a>
+                    <a href="#b2b-form"
+                        class="inline-block bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs px-8 py-3.5 rounded-lg uppercase tracking-wider transition">Get
+                        Instant Factory Quote</a>
                 </div>
             </div>
         </div>
@@ -96,8 +210,10 @@
 
     <footer class="bg-slate-900 text-slate-400 py-12 text-sm border-t border-slate-800">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs">
-            <p>&copy; 2026 MFWCW Materials. All Rights Reserved. Specializing in high-performance Slimline Patio Door Systems.</p>
+            <p>&copy; 2026 MFWCW Materials. All Rights Reserved. Specializing in high-performance Slimline Patio Door
+                Systems.</p>
         </div>
     </footer>
 </body>
+
 </html>
